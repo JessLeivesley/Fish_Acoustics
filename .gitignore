@@ -4,7 +4,5 @@
 .Ruserdata
 *.Rproj
 .DS_Store
-data/*
-!data/README.md
 output/*
 !output/README.md
