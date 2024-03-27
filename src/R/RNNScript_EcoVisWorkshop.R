@@ -14,7 +14,7 @@ library(str2str)
 library(pROC)
 
 # Read in the dataset
-raw_data<-readRDS("../../data/TSresponse_clean.RDS")
+raw_data<-readRDS("data/TSresponse_clean.RDS")
 
 # Data has one row per ping, with the target strength at each 0.5kHz frequency between 45 and 170kHz (except 90 & 90.5). 
 
