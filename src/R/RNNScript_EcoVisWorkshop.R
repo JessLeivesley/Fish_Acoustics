@@ -54,6 +54,23 @@ data_long%>%
   geom_ribbon(aes(x=frequency,ymin=lower95,ymax=upper95,group=species,fill=species),alpha=0.5)+
   theme_bw()+
   ylab("Target Strength")
+
+# Group by fishNum and then summarize the mean for columns 52 to 302
+avg_data <- raw_data %>%
+  group_by(fishNum, species) %>%
+  summarize(across(50:299, mean, na.rm = TRUE))
+
+avg_long<-gather(avg_data, frequency, value, F45:F170)
+avg_long$frequency<-as.numeric(gsub('F','',avg_long$frequency))
+
+avg_long%>%
+  group_by(species,frequency)%>%
+  summarise(meanTS=mean(value),upper95=quantile(value,0.975),lower95=quantile(value,0.025))%>%
+  ggplot()+
+  geom_line(aes(x=frequency,y=meanTS,col=species))+
+  geom_ribbon(aes(x=frequency,ymin=lower95,ymax=upper95,group=species,fill=species),alpha=0.5)+
+  theme_bw()+
+  ylab("Target Strength")
   
   
 ## Split the wide format data into training/validating/testing
