@@ -11,7 +11,9 @@ library(tensorflow)
 library(kernelshap)
 library(shapviz)
 library(str2str)
-library(pROC)
+library(ROCR)
+
+install.packages()
 
 # Read in the dataset
 raw_data<-readRDS("data/TSresponse_clean.RDS")
@@ -291,3 +293,11 @@ species.predictions<-as.factor(ifelse(species.predictions == 1, "LT",
                                       "SMB"))
 confusionMatrix(species.predictions,as.factor(y_data_test))
 
+# plot the ROC curve
+
+# put the data in the format necessary (bind the prediction for class SMB with the true labelled data) 
+pred <- prediction(preds[,2], y_data_test)
+# extract the performance of the model - true positive rate and false postive rate
+perf <- performance(pred,"tpr","fpr")
+# plot the ROC curve
+plot(perf,colorize=TRUE,lwd=5)
