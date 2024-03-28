@@ -300,4 +300,16 @@ pred <- prediction(preds[,2], y_data_test)
 # extract the performance of the model - true positive rate and false postive rate
 perf <- performance(pred,"tpr","fpr")
 # plot the ROC curve
-plot(perf,colorize=TRUE,lwd=5)
+ROC_PLOT<-plot(perf,colorize=TRUE,lwd=5)
+
+ROC_PLOT<-ggplot()+
+  geom_abline(slope=1, color="grey",size=2)+
+  geom_point(aes(x=perf@x.values[[1]],y=perf@y.values[[1]],col=perf@alpha.values[[1]]))+
+  scale_colour_gradientn(colors=rainbow(7),guide = guide_colorbar(
+    barwidth = 0.5,barheight=15,title="threshold",ticks=T))+
+  theme_classic()+
+  xlab("False positive rate")+
+  ylab("True positive rate")+
+  theme(text=element_text(size=18))
+
+ggsave(file="ROC.svg", plot=ROC_PLOT, width=6.5, height=5)
