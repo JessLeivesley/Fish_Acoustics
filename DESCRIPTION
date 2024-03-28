@@ -1,11 +1,22 @@
-Package: ecoviztemplate
-Title: One Line, Title Case
+Package: Fish_Acoustics
+Title: Fish Acoustics
 Authors@R: 
-    person(given = "First", family = "Last",
-           email = "email@domain.com", role = c("aut", "cre"),
-           comment = c("ORCID-ID" = "ORCID"))
-Description: Describe the analysis.
+    person(given = "Jessica", family = "Leivesley",
+           email = "jessica.leivesley@utoronto.ca", role = c("aut", "cre"),
+           comment = c("ORCID-ID" = "0000-0002-3620-975X"))
+Description: Fish classification from active acousting pinging using a RNN.
 Imports: 
-    package (== version)
-URL: https://github.com/FlukeAndFeather/ecoviztemplate
-BugReports: https://github.com/FlukeAndFeather/ecoviztemplate/issues
+    dplyr (= 1.1.2),
+    tidymodels (= 1.1.0),
+    vip (= 0.3.2)
+    keras (= 2.13.0)
+    rBayesianOptimization (= 1.2.0)
+    caret (= 6.0-94)
+    tensorflow (= 2.14.0)
+    kernelshap (= 0.4.1)
+    shapviz (= 0.9.3)
+    str2str (= 1.0.0)
+    pROC (= 1.18.4)
+
+URL: https://github.com/JessLeivesley/Fish_Acoustics
+BugReports: https://github.com/JessLeivesley/Fish_Acoustics/issues
