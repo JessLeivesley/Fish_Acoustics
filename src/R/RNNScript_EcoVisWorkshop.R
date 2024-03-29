@@ -21,42 +21,6 @@ raw_data<-readRDS("data/TSresponse_clean.RDS")
 # Data has one row per ping, with the target strength at each 0.5kHz frequency between 45 and 170kHz (except 90 & 90.5). 
 
 # Plot the frequency response for each species, Lake Trout and Smallmouth Bass
-
-# convert to long format to plot
-data_long<-gather(raw_data,frequency,TS,F45:F170)
-data_long$frequency<-as.numeric(gsub('F','',data_long$frequency))
-
-ggplot(data_long)+
-  geom_line(aes(x=frequency,y=TS),alpha=0.1,linewidth=0.5)+
-  theme_bw()+
-  ylab("Target Strength")+
-  facet_wrap(~species)
-
-# For one individual only
-data_long%>%
-  filter(fishNum=="LT009")%>%
-  ggplot()+
-  geom_line(aes(x=frequency,y=TS),alpha=0.2,linewidth=0.5)+
-  theme_bw()+
-  ylab("Target Strength")
-
-data_long%>%
-  filter(fishNum=="SMB010")%>%
-  ggplot()+
-  geom_line(aes(x=frequency,y=TS),alpha=0.2,linewidth=0.5)+
-  theme_bw()+
-  ylab("Target Strength")
-
-# summarised information
-data_long%>%
-  group_by(species,frequency)%>%
-  summarise(meanTS=mean(TS),upper95=quantile(TS,0.975),lower95=quantile(TS,0.025))%>%
-  ggplot()+
-  geom_line(aes(x=frequency,y=meanTS,col=species))+
-  geom_ribbon(aes(x=frequency,ymin=lower95,ymax=upper95,group=species,fill=species),alpha=0.5)+
-  theme_bw()+
-  ylab("Target Strength")
-  
   
 ## Split the wide format data into training/validating/testing
 set.seed(73)
